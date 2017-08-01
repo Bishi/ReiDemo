@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
 
+
 /*LOGIN FORM--------------------------------------------------------------------*/
 
 body {
@@ -99,6 +100,7 @@ body {
 }
 
 
+
 /*SIDEBAR-----------------------------------------------------*/
 
 body,
@@ -106,6 +108,7 @@ html,
 .row-offcanvas {
     height: 100%;
 }
+
 
 
 /*  body {
@@ -128,6 +131,7 @@ html,
     height: 100%;
     overflow: auto;
 }
+
 
 
 /*
@@ -165,6 +169,7 @@ html,
 }
 
 
+
 /*Campaign page*/
 
 #documentation,
@@ -193,6 +198,7 @@ html,
 #campaign_doc {
     padding-top: 15px;
 }
+
 
 
 /*dashboard chart*/
@@ -240,6 +246,7 @@ html,
 #gchart_div {
     height: 300px;
 }
+
 
 
 /* Custom css */
@@ -369,6 +376,7 @@ tr td:last-of-type {
 .dataTables_filter {
     display: none !important
 }
+
 
 
 /*sidebar*/
@@ -510,7 +518,7 @@ tr td:last-of-type {
 .header_body {
     text-align: center;
     padding-top: 40px;
-    font-size: 48px;
+    font-size: 52px;
     font-weight: 300;
 }
 
@@ -533,6 +541,7 @@ tr td:last-of-type {
 .header_body.header_raised {
     color: #40bfc1;
 }
+
 
 
 /*campaings*/
@@ -577,6 +586,7 @@ tr td:last-of-type {
 #campaign_table_length .form-inline .form-control {
     float: none
 }
+
 
 
 /*campaings SINGLE*/
@@ -759,6 +769,7 @@ input[name="cancel_form"]:hover {
 }
 
 
+
 /*LOGIN PAGE*/
 
 .login-left {
@@ -778,7 +789,24 @@ input[name="cancel_form"]:hover {
     -ms-transform: translate(-50%, 75%);
 }
 
-@media screen and (max-width: 1600px) {
+.dashboard_header_div:first-child {
+    width: 34%
+}
+
+@media screen and (min-width: 1250px) and (max-width: 1600px) {
+
+    .header_body {
+        font-size: 35px;
+        padding-top: 51px
+    }
+
+    .dashboard_header_div .header_title {
+        padding-top: 40px;
+        font-size: 17px
+    }
+}
+
+@media screen and (max-width: 1250px) {
 
     .dashboard_header_div .header_title {
         font-size: 15px
@@ -809,35 +837,36 @@ input[name="cancel_form"]:hover {
         margin-right: 0;
     }
 
-    .header_body {font-size: 42px;padding: 50px 0}
-}
+    .header_body {
+        font-size: 25px;
+        padding: 50px 0
+    }
 
-
-@media screen and (max-width: 1200px) {
-
-
- .dashboard_header_div {
+    .dashboard_header_div {
         display: block;
         width: 100%;
         float: none;
         margin: 20px 0;
     }
-
-
 }
 
 
 @media screen and (max-width: 991px) {
 
-#campaign_header>div {
-    width: 100% !important;
-}
+    #campaign_header>div {
+        width: 100% !important;
+    }
 
-#campaign_header+form .col-sm-6 {width: 100%}
+    #campaign_header+form .col-sm-6 {
+        width: 100%
+    }
 
-#campaign_header {display: block}
-#campaign_header #target_amount {
-    margin: 20px 0;}
+    #campaign_header {
+        display: block
+    }
+    #campaign_header #target_amount {
+        margin: 20px 0;
+    }
 
     .login-left {
         height: 400px !important
@@ -855,11 +884,11 @@ input[name="cancel_form"]:hover {
 
 @media screen and (max-width: 767px) {
 
-#container_right {
-    float: none;
-    margin-left: 0;
-    margin-right: 0;
-}
+    #container_right {
+        float: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
 
     .sidebar-offcanvas {
         display: none;
