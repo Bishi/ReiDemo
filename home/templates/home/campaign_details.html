@@ -13,10 +13,14 @@
     <div id="campaign_header">
         <div id="funding_status">
             <div class="header_title header_campaigns">
-                Funding duration:
+                Remaining:
             </div>
             <div class="header_body body_campaigns">
-                {{ data.endDate }}
+                {% if remaining == 0 %}
+                    Ended on {{ data.endDate }}
+                {% elif remaining != 0 %}
+                    {{ remaining }} days
+                {% endif %}
             </div>
         </div>
         <div id="target_amount">

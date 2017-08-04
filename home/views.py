@@ -1,8 +1,5 @@
-from graphos.renderers import morris, gchart
-from graphos.sources.model import ModelDataSource
-from graphos.sources.simple import SimpleDataSource
-from graphos.renderers.gchart import LineChart, PieChart
 import requests, json
+from datetime import datetime
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template.context_processors import csrf
@@ -183,7 +180,6 @@ def campaigns_view(request):
             if entry['currentAmount'] is not None and entry['targetAmount'] is not None:
                 current = (entry['currentAmount'])
                 target = (entry['targetAmount'])
-                # current = (20000)
                 value = ((current / target) * 100)
                 entry['progress'] = round(value, 2)
     except:
@@ -216,14 +212,20 @@ def campaign_details_view(request, campaign_id=None):
                     'permanent_residence': json_data['owner']['permanentResidence'],
                     'email': json_data['owner']['email'],
                     'mobile_number': json_data['owner']['mobileNumber'],
-                    # 'project_location': json_data['projectLocation'],
                     'IBAN': json_data['owner']['iban'],
                     'campaign_page_url': json_data['campaignUrl'],
-                    # 'campaign_page_id': json_data['campaignPageId'],
                     'description': json_data['description'],
                     'comments': json_data['comment'],
                     'status': json_data['campaignStatus'],
-    }
+                    }
+
+    date_format = "%Y-%m-%d"
+    today_date = datetime.today()
+    end_date = datetime.strptime(json_data['endDate'], date_format)
+    if end_date > today_date:
+        remaining = abs((today_date - end_date).days)
+    else:
+        remaining = 0
 
     if request.method == 'POST':
         form = EditCampaignForm(request.POST, initial=initial_data)
@@ -234,6 +236,7 @@ def campaign_details_view(request, campaign_id=None):
 
     args['form'] = form
     args['data'] = json_data
+    args['remaining'] = remaining
 
     return render_to_response('home/campaign_details.html', args)
 
