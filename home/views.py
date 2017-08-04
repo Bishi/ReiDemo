@@ -135,7 +135,7 @@ def campaign_proposal_details_view(request, proposal_id=None):
             json_data['proposalStatus'] = form.cleaned_data['status']
             json_data['approverDetails'] = form.cleaned_data['comments']
 
-            requests.put('https://ct-campaign-service.herokuapp.com/campaignProposal/' + proposal_id,
+            r = requests.put('https://ct-campaign-service.herokuapp.com/campaignProposal/' + proposal_id,
                          headers=headers,
                          data=json.dumps(json_data))
 
