@@ -35,17 +35,6 @@ def users_view(request):
 
 
 def campaign_proposals_view(request):
-    # chart_data = [
-    #    ['Running', 'Pending', 'Failed', 'Finished'],
-    #    ['Running', 101],
-    #    ['Pending', 40],
-    #    ['Failed', 3],
-    #    ['Finished', 10],
-    # ]
-    # data_source = SimpleDataSource(data=chart_data,)
-    # chart = morris.DonutChart(data_source, height=250, width=250)
-    # chart = morris.DonutChart(data_source, html_id='donut_div')
-
     try:
         proposal_response = requests.get('https://ct-campaign-service.herokuapp.com/campaignProposal')
         content = proposal_response.content
