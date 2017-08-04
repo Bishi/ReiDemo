@@ -136,8 +136,8 @@ def campaign_proposal_details_view(request, proposal_id=None):
             json_data['approverDetails'] = form.cleaned_data['comments']
 
             r = requests.put('https://ct-campaign-service.herokuapp.com/campaignProposal/' + proposal_id,
-                         headers=headers,
-                         data=json.dumps(json_data))
+                             headers=headers,
+                             data=json.dumps(json_data))
 
             if form.cleaned_data['status'] == 'Approved' and request.POST.get("start_campaign"):
                 r = requests.post('https://ct-campaign-service.herokuapp.com/campaignProposal/' +
