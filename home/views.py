@@ -181,7 +181,7 @@ def campaigns_view(request):
 
         for entry in json_data:
             if entry['currentAmount'] is not None and entry['targetAmount'] is not None:
-                current = (entry['currentAmount']) = 20000
+                current = (entry['currentAmount'])
                 target = (entry['targetAmount'])
                 # current = (20000)
                 value = ((current / target) * 100)
