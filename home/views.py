@@ -24,7 +24,7 @@ def users_view(request):
         my_json = content.decode('utf8').replace("'", '"')
         json_data = json.loads(my_json)
     except:
-        json_data = "Could not fetch Users"
+        json_data = None
 
     args = {}
     args.update(csrf(request))
@@ -174,7 +174,7 @@ def campaigns_view(request):
                 value = ((current / target) * 100)
                 entry['progress'] = round(value, 2)
     except:
-        json_data = "Could not fetch Campaigns"
+        json_data = None
 
     args = {}
     args.update(csrf(request))
