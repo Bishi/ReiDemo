@@ -1,7 +1,8 @@
-import requests, json
+import requests
+import json
 from datetime import datetime
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.shortcuts import render, render_to_response
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import render_to_response
 from django.template.context_processors import csrf
 from home.forms import EditCampaignForm, EditProposalForm, EditProposalFormApproved
 from django.core.urlresolvers import reverse
@@ -68,6 +69,7 @@ def campaign_proposals_view(request):
         campaign_json_data = None
         number_of_campaigns = 0
         number_of_pledges = 0
+        pledge_json_data = None
 
     chart_data = {'Pending': 0, 'Running': 0, 'Finished': 0, 'Failed': 0}
 
@@ -87,7 +89,6 @@ def campaign_proposals_view(request):
             pledge_amount += pledge['pledgedAmount']
         except:
             pass
-
 
     args = {}
     args.update(csrf(request))
@@ -127,7 +128,7 @@ def campaign_proposal_details_view(request, proposal_id=None):
                     'description': json_data['description'],
                     'comments': json_data['approverDetails'],
                     'status': json_data['proposalStatus'],
-    }
+                    }
 
     if request.method == 'POST':
         if json_data['proposalStatus'] == 'Approved':
@@ -145,17 +146,18 @@ def campaign_proposal_details_view(request, proposal_id=None):
             json_data['proposalStatus'] = form.cleaned_data['status']
             json_data['approverDetails'] = form.cleaned_data['comments']
 
-            r = requests.put('https://ct-campaign-service.herokuapp.com/campaignProposal/' + proposal_id,
-                             headers=headers,
-                             data=json.dumps(json_data))
+            requests.put('https://ct-campaign-service.herokuapp.com/campaignProposal/' + proposal_id,
+                         headers=headers,
+                         data=json.dumps(json_data))
 
             if form.cleaned_data['status'] == 'Approved' and request.POST.get("start_campaign"):
-                r = requests.post('https://ct-campaign-service.herokuapp.com/campaignProposal/' + proposal_id + '/start',
-                                  headers=headers)
+                r = requests.post('https://ct-campaign-service.herokuapp.com/campaignProposal/' +
+                                  proposal_id + '/start', headers=headers)
                 campaign_id = json.loads(r.content.decode('utf8'))['id']
                 return HttpResponseRedirect(reverse('home:campaign_details', kwargs={'campaign_id': campaign_id}))
             else:
-                return HttpResponseRedirect(reverse('home:campaign_proposal_details', kwargs={'proposal_id': proposal_id}))
+                return HttpResponseRedirect(reverse('home:campaign_proposal_details',
+                                                    kwargs={'proposal_id': proposal_id}))
     else:
         if json_data['proposalStatus'] == 'Approved':
             form = EditProposalFormApproved(initial=initial_data)
