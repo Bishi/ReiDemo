@@ -213,6 +213,7 @@ def campaign_details_view(request, campaign_id=None):
     date_format = "%Y-%m-%d"
     today_date = datetime.today()
     end_date = datetime.strptime(json_data['endDate'], date_format)
+    
     if end_date > today_date:
         remaining = abs((today_date - end_date).days)
     else:
