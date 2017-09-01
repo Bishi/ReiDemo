@@ -74,7 +74,7 @@ class EditCampaignForm(forms.Form):
     campaign_page_url = forms.CharField(max_length=100, disabled=True)
     description = forms.CharField(widget=forms.Textarea, disabled=True)
     comments = forms.CharField(widget=forms.Textarea, label="Approver Comments")
-    status = forms.ChoiceField(label='Status', choices=PROPOSAL_STATUSES, disabled=True)
+    status = forms.ChoiceField(label='Status', choices=CAMPAIGN_STATUSES, disabled=True)
 
 
 class EditProposalForm(forms.Form):
