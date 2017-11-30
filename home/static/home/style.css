@@ -252,8 +252,8 @@ html,
 /* Custom css */
 
 .navbar-inverse {
-    background-color: #fff200;
-    border-color: #fff200;
+    background-color: #5769ef;
+    border-color: #5769ef;
 }
 
 .navbar-inverse .navbar-nav>.active>a,
@@ -423,7 +423,7 @@ tr td:last-of-type {
 
 #sidebar ul li::before {
     display: inline-block;
-    color: #f4e801;
+    color: #5769ef;
     margin-right: 20px;
     position: relative;
     width: 20px;
@@ -773,7 +773,7 @@ input[name="cancel_form"]:hover {
 /*LOGIN PAGE*/
 
 .login-left {
-    background: url('../../../media/pictures/login_photo.jpg') center center no-repeat;
+    background: url('../../../media/pictures/assisto-login2.png') center center no-repeat;
 }
 
 .login-page {
@@ -934,4 +934,14 @@ input[name="cancel_form"]:hover {
     .login-left {
         min-height: 300px;
     }
+}
+
+.btn-link {
+    height: 21px;
+    padding: 0 0 0 10px;
+    margin: -2px 0 0 0;
+}
+
+.unpledge-form {
+    height: 21px;
 }

@@ -28,7 +28,26 @@
                     <td>{{ entry.pledgeStatus }}</td>
                     <td>{{ entry.pledgedAmount|floatformat:2 }}</td>
                     <td>No Comment</td>
-                    <td>View, Unpledge</td>
+{#                    <td>View, <a href="{% url 'home:transactions' %}">Unpledge</a></td>#}
+                    {% if entry.pledgeStatus == 'Pledged' %}
+                    <td>
+                        <div style="display: flex">
+                            <div>
+                                View,
+                            </div>
+                            <div>
+                                <form class="unpledge-form" method="put" action="{% url 'home:transactions' %}">
+                                    {% csrf_token %}
+                                    <input id="pledge_id" type="hidden" name="pledge_id" value={{ entry.id }} />
+                                    <input type="submit" value="Unpledge" name="unpledge_button" class="btn btn-link">
+                                </form>
+                            </div>
+                        </td>
+                        {% else %}
+                            <td>View
+                        </td>
+                        {% endif %}
+                    </div>
                 </tr>
             {% endfor %}
         </tbody>

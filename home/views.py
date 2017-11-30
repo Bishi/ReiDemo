@@ -4,7 +4,7 @@ from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context_processors import csrf
-from home.forms import EditCampaignForm, EditProposalForm, EditProposalFormApproved
+from home.forms import EditCampaignForm, EditProposalForm, EditProposalFormApproved, UnpledgeForm
 from django.core.urlresolvers import reverse
 
 
@@ -71,6 +71,10 @@ def campaign_proposals_view(request):
             chart_data['Finished'] += 1
         elif campaign['campaignStatus'] == 'Failed':
             chart_data['Failed'] += 1
+
+    # for proposal in proposal_json_data:
+    #     if proposal['proposalStatus'] == 'Pending':
+    #         chart_data['Pending'] += 1
 
     pledge_amount = 0
     for pledge in pledge_json_data:
@@ -213,7 +217,7 @@ def campaign_details_view(request, campaign_id=None):
     date_format = "%Y-%m-%d"
     today_date = datetime.today()
     end_date = datetime.strptime(json_data['endDate'], date_format)
-    
+
     if end_date > today_date:
         remaining = abs((today_date - end_date).days)
     else:
@@ -242,6 +246,24 @@ def transactions_view(request):
         json_data = json.loads(my_json)
     except:
         raise Http404("Cannot fetch transactions")
+
+    headers = {"Content-Type": "application/json"}
+
+    if request.method == 'PUT':
+        form = UnpledgeForm(request.PUT)
+        if form.is_calid():
+            pledge_id = form.cleaned_data['pledge_id']
+            response = requests.get('https://ct-campaign-service.herokuapp.com/campaignPledge/' + pledge_id)
+            content = response.content
+
+            my_json = content.decode('utf8').replace("'", '"')
+            json_data = json.loads(my_json)
+
+            json_data['pledgeStatus'] = 'Unpledged'
+
+            r = requests.post('https://ct-campaign-service.herokuapp.com/campaignPledge/' +
+                              pledge_id + '/', headers=headers, data=json_data)
+
 
     args = {}
     args.update(csrf(request))

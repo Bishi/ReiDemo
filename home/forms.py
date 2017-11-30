@@ -114,3 +114,7 @@ class EditProposalFormApproved(EditProposalForm):
         super(EditProposalForm, self).__init__(*args, **kwargs)
 
     status = forms.ChoiceField(label='Status', choices=PROPOSAL_STATUSES, disabled=True)
+
+
+class UnpledgeForm(forms.Form):
+    pledge_id = forms.CharField(max_length=100, disabled=True)
