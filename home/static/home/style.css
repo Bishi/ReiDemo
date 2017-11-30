@@ -252,8 +252,8 @@ html,
 /* Custom css */
 
 .navbar-inverse {
-    background-color: #5769ef;
-    border-color: #5769ef;
+    background-color: #1c1c1c;
+    border-color: #1c1c1c;
 }
 
 .navbar-inverse .navbar-nav>.active>a,
@@ -423,7 +423,7 @@ tr td:last-of-type {
 
 #sidebar ul li::before {
     display: inline-block;
-    color: #5769ef;
+    color: #FF0000;
     margin-right: 20px;
     position: relative;
     width: 20px;
